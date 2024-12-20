@@ -11,9 +11,9 @@ There's no guarantee that this package will work in the future, as it's based on
 You just need to add this plugin in your `pubspec.yaml` file like this:
 ```yaml
 dependencies:
-	flutter_poki_sdk:
-		git:
-			url: git@github.com:imaNNeo/flutter_poki_sdk.git
+  flutter_poki_sdk:
+    git:
+      url: git@github.com:imaNNeo/flutter_poki_sdk.git
 ```
 Then, you have to add this line in your `index.html` file:
 ```html
