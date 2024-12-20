@@ -1,39 +1,65 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Flutter Poki Sdk
+This is a Flutter package that provides a simple way to interact with the [Poki](https://poki.com/) API.
+At this time, there's no official Poki API, so I decided to create one for Flutter. 
+This package is based on the [Poki HTML5](https://sdk.poki.com/html5.html) SDK (which is using a .js file)
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages). 
+## Disclaimer
+This package is not official and is not affiliated with Poki. It's just a simple way to interact with their API in a Flutter project.
+There's no guarantee that this package will work in the future, as it's based on the HTML5 SDK and created on 2024-12-20.
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages). 
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
-
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
-
-```dart
-const like = 'sample';
+## Installation
+You just need to add this plugin in your `pubspec.yaml` file like this:
+```yaml
+dependencies:
+	flutter_poki_sdk:
+		git:
+			url: git@github.com:imaNNeo/flutter_poki_sdk.git
+```
+Then, you have to add this line in your `index.html` file:
+```html
+<body>
+	<!-- Other lines -->
+	
+	<!-- Add this line -->
+	<script src="https://game-cdn.poki.com/scripts/v2/poki-sdk.js"></script>
+</body>
 ```
 
-## Additional information
+Then, run `flutter pub get` in your terminal.
 
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+
+## How to use
+
+Now, you're able to use the Poki SDK in your Flutter project (only works for web). 
+Here's an example of how to use it:
+
+```dart
+import 'package:flutter_poki_sdk/flutter_poki_sdk.dart';
+
+void main() async {
+  try {
+    await PokiSDK.init();
+    debugPrint('SDK initialized');
+
+    // Now you can use other functions such as:
+    PokiSDK.gameLoadingFinished();
+    PokiSDK.gameplayStart();
+    PokiSDK.gameplayStop();
+    final commercialBreakResult = await PokiSDK.commercialBreak(onStarted: () {
+      debugPrint('commercialBreak started');
+    });
+    final rewardedBreakResult = await PokiSDK.rewardedBreak(onStarted: () {
+      debugPrint('rewardedBreak started');
+    });
+    final shareableURL = await PokiSDK.shareableURL({'playerId': 'imaNNeo'});
+    final playerId = PokiSDK.getURLParam('playerId');
+    debugPrint('playerId is $playerId');
+  } catch (e) {
+    debugPrint('SDK initialization failed: $e');
+  }
+  runApp(const MyApp());
+}
+```
+
+Please read more about the available functions in their official HTML5 SDK [here](https://sdk.poki.com/html5.html).
+Then you will know how to use them in your Flutter game
