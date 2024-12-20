@@ -1,14 +1,14 @@
 name: flutter_poki_sdk
-description: A starting point for Dart libraries or applications.
+description: The Poki SDK for Flutter (based on sdk.poki.com/html5.html)
 version: 1.0.0
-# repository: https://github.com/my_org/my_repo
+repository: https://github.com/imaNNeo/flutter_poki_sdk
+publish_to: none
 
 environment:
   sdk: ^3.6.0
 
-# Add regular dependencies here.
 dependencies:
-  # path: ^1.8.0
+  js_interop: ^0.0.1
 
 dev_dependencies:
   lints: ^5.0.0
