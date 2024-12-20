@@ -66,7 +66,7 @@ PokiSDK.commercialBreak().then(() => {
 });
 */
 @JS()
-external JSPromise<JSAny?> commercialBreak([JSFunction? onStarted]);
+external JSPromise<JSAny?> commercialBreak([JSFunction onStarted]);
 
 /*
 // pause your game here if it isn't already

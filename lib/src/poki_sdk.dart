@@ -8,6 +8,9 @@ import 'flutter_poki_sdk_interop.dart' as interop;
 /// Designed based on this doc:
 /// https://sdk.poki.com/html5.html
 class PokiSDK {
+  // Make the constructor private to prevent instantiation
+  PokiSDK._();
+
   /// Initialize the SDK at the start of your game with the following method:
   static Future<void> init() => interop.init().toDart;
 
@@ -33,9 +36,9 @@ class PokiSDK {
   /// Poki’s system will determine when a user is ready for another ad,
   /// so feel free to signal as many commercial break opportunities as possible.
   static Future<void> commercialBreak({
-    void Function()? onStarted,
+    required void Function() onStarted,
   }) =>
-      interop.commercialBreak(onStarted?.toJS).toDart;
+      interop.commercialBreak(onStarted.toJS).toDart;
 
   /// Trigger a rewarded break and return success status.
   ///
