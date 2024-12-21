@@ -11,8 +11,22 @@ class PokiSDK {
   // Make the constructor private to prevent instantiation
   PokiSDK._();
 
+  static bool _isInitialized = false;
+
+  static bool get isInitialized => _isInitialized;
+
   /// Initialize the SDK at the start of your game with the following method:
-  static Future<void> init() => interop.init().toDart;
+  static Future<void> init() async {
+    if (_isInitialized) {
+      return;
+    }
+    try {
+      await interop.init().toDart;
+      _isInitialized = true;
+    } catch (e) {
+      rethrow;
+    }
+  }
 
   /// In order to provide an accurate conversion to play metric for your game,
   /// please fire the following events when your loading has finished:
